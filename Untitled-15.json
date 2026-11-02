@@ -1,0 +1,17 @@
+{
+  "usuarios": [
+    { "id": 1, "nome": "Eriselma Flores", "email": "eriselma@uninter.com", "perfil": "ADMIN", "consentimento_lgpd": true, "data_consentimento": "2026-11-02" },
+    { "id": 2, "nome": "Carlos Atendente", "email": "carlos@lanchonete.com", "perfil": "ATENDENTE", "consentimento_lgpd": true, "data_consentimento": "2026-11-02" }
+  ],
+  "produtos": [
+    { "id": 101, "nome": "Tapioca Nordestina", "preco": 15.90, "ativo": true },
+    { "id": 102, "nome": "Cuscuz Completo", "preco": 12.50, "ativo": true }
+  ],
+  "pedidos": [
+    { "id": 9001, "usuario_id": 1, "unidade_id": 1, "canalPedido": "TOTEM", "status": "RECEBIDO", "total": 31.80, "criado_em": "2026-11-02T14:00:00Z" }
+  ],
+  "estoque": [
+    { "unidade_id": 1, "produto_id": 101, "quantidade_disponivel": 50 },
+    { "unidade_id": 1, "produto_id": 102, "quantidade_disponivel": 30 }
+  ]
+}
