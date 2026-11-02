@@ -1,0 +1,38 @@
+sequenceDiagram
+  autonumber
+  actor C as Cliente / Atendente
+  participant API as API (Controllers + JWT)
+  participant APP as Application (casos de uso)
+  participant DB as Banco de dados
+  participant GW as Gateway mock
+  actor K as Cozinha
+  C->>API: POST /pedidos (canalPedido, unidadeId, itens)
+  API->>API: valida JWT, perfil e canalPedido
+  API->>APP: criarPedido()
+  APP->>DB: [transação] verifica saldo e baixa estoque
+  alt saldo insuficiente
+    APP-->>API: rollback
+    API-->>C: 409 ESTOQUE_INSUFICIENTE
+  else saldo suficiente
+    APP->>DB: grava pedido AGUARDANDO_PAGAMENTO
+    API-->>C: 201 Created (pedidoId)
+  end
+  C->>API: POST /pagamentos/processar (pedidoId)
+  API->>APP: processarPagamento()
+  APP->>GW: solicita cobrança (com timeout)
+  alt APPROVED
+    GW-->>APP: APPROVED
+    APP->>DB: registra pagamento, status RECEBIDO
+    API-->>C: 200 (statusGateway APPROVED)
+  else DENIED
+    GW-->>APP: DENIED
+    APP->>DB: registra pagamento, devolve estoque, status CANCELADO
+    API-->>C: 200 (statusGateway DENIED)
+  else timeout / indisponível
+    APP->>DB: mantém AGUARDANDO_PAGAMENTO e registra falha
+    API-->>C: erro padronizado
+  end
+  K->>API: PATCH /pedidos/{id}/status (EM_PREPARO)
+  API->>APP: atualizarStatus()
+  APP->>DB: valida transição, grava e emite log de auditoria
+  API-->>K: 200 (statusAtual)

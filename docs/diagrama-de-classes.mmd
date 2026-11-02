@@ -1,0 +1,88 @@
+classDiagram
+  direction LR
+  class CanalPedido {
+    <<enumeration>>
+    APP
+    TOTEM
+    BALCAO
+    PICKUP
+    WEB
+  }
+  class StatusPedido {
+    <<enumeration>>
+    AGUARDANDO_PAGAMENTO
+    RECEBIDO
+    EM_PREPARO
+    PRONTO
+    ENTREGUE
+    CANCELADO
+  }
+  class PerfilUsuario {
+    <<enumeration>>
+    CLIENTE
+    ATENDENTE
+    COZINHA
+    GERENTE
+    ADMIN
+  }
+  class Usuario {
+    -id
+    -nome
+    -email
+    -senhaHash
+    -perfil
+    -consentimentoLgpd
+    -dataConsentimento
+    +registrarConsentimento()
+  }
+  class Unidade {
+    -id
+    -nomeFantasia
+    -cidade
+    -estado
+    -ativa
+  }
+  class Produto {
+    -id
+    -nome
+    -preco
+    -ativo
+  }
+  class Estoque {
+    -quantidadeDisponivel
+    +possuiSaldo(qtd) bool
+    +baixar(qtd)
+    +devolver(qtd)
+  }
+  class Pedido {
+    -id
+    -canalPedido
+    -status
+    -valorTotal
+    -idempotencyKey
+    -criadoEm
+    +calcularTotal()
+    +podeTransitarPara(novo) bool
+    +atualizarStatus(novo)
+    +cancelar()
+  }
+  class ItemPedido {
+    -quantidade
+    -precoUnitario
+    +subtotal()
+  }
+  class Pagamento {
+    -statusTransacao
+    -payloadRetorno
+    -processadoEm
+  }
+  Usuario "1" --> "0..*" Pedido : realiza
+  Unidade "1" --> "0..*" Pedido : recebe
+  Pedido "1" *-- "1..*" ItemPedido : contém
+  ItemPedido "0..*" --> "1" Produto : refere-se a
+  Unidade "1" --> "0..*" Estoque : possui
+  Produto "1" --> "0..*" Estoque : controlado em
+  Pedido "1" --> "0..1" Pagamento : gera
+  Usuario ..> PerfilUsuario
+  Pedido ..> CanalPedido
+  Pedido ..> StatusPedido

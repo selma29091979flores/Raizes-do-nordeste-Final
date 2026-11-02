@@ -1,0 +1,30 @@
+digraph G {
+  rankdir=LR; fontname="Arial"; nodesep=0.35; ranksep=1.1; splines=true;
+  node [fontname="Arial", fontsize=11];
+  edge [fontname="Arial", fontsize=9, arrowhead=none];
+  node [shape=box, style="rounded,filled", fillcolor="#E8EEF7", color="#1F3864"];
+  Cliente [label="«ator»\nCliente\n(App / Web / Totem)"];
+  Atendente [label="«ator»\nAtendente\n(Balcão)"];
+  Cozinha [label="«ator»\nCozinha"];
+  Admin [label="«ator»\nGerente / Admin"];
+  subgraph cluster_s { label="Sistema Raízes do Nordeste (API REST)"; style="rounded"; color="#1F3864"; fontsize=12;
+    node [shape=ellipse, style=filled, fillcolor="white", color="#444444"];
+    UC1 [label="UC1 – Cadastrar usuário"];
+    UC2 [label="UC2 – Autenticar (JWT)"];
+    UC3 [label="UC3 – Realizar pedido\nmulticanal"];
+    UC8 [label="UC8 – Validar estoque\nda unidade"];
+    UC9 [label="UC9 – Validar canalPedido"];
+    UC4 [label="UC4 – Processar\npagamento (mock)"];
+    UC5 [label="UC5 – Atualizar status\ndo pedido"];
+    UC6 [label="UC6 – Consultar pedidos\npor canal"];
+    UC7 [label="UC7 – Gerenciar estoque"];
+  }
+  Gateway [label="«ator externo»\nGateway de Pagamento\n(mock)", fillcolor="#FFF2CC", color="#7F6000"];
+  Cliente -> UC1; Cliente -> UC2; Cliente -> UC3; Cliente -> UC4;
+  Atendente -> UC2; Atendente -> UC3; Atendente -> UC4;
+  Cozinha -> UC2; Cozinha -> UC5;
+  Admin -> UC2; Admin -> UC5; Admin -> UC6; Admin -> UC7;
+  UC3 -> UC8 [style=dashed, arrowhead=vee, label="«include»"];
+  UC3 -> UC9 [style=dashed, arrowhead=vee, label="«include»"];
+  UC4 -> Gateway;
+}
