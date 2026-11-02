@@ -1,0 +1,10 @@
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600,
+  "user": {
+    "id": 2,
+    "nome": "Carlos Atendente",
+    "perfil": "ATENDENTE"
+  }
+}

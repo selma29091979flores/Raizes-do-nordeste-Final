@@ -1,0 +1,5 @@
+{
+  "pedidoId": 9001,
+  "statusAnterior": "RECEBIDO",
+  "statusAtual": "EM_PREPARO"
+}

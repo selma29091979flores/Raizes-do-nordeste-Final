@@ -1,0 +1,7 @@
+{
+  "error": "CREDENCIAIS_INVALIDAS",
+  "message": "E-mail ou senha inválidos.",
+  "details": [],
+  "timestamp": "2026-10-24T14:45:01Z",
+  "path": "/api/v1/auth/login"
+}

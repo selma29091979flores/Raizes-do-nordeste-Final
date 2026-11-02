@@ -1,0 +1,9 @@
+{
+  "error": "NOME_DO_ERRO",
+  "message": "Mensagem legível",
+  "details": [
+    { "field": "campo", "issue": "problema" }
+  ],
+  "timestamp": "2026-10-24T14:45:00Z",
+  "path": "/rota"
+}

@@ -1,0 +1,6 @@
+{
+  "transacaoId": "tx_mock_992812",
+  "pedidoId": 9002,
+  "statusGateway": "DENIED",
+  "novoStatusPedido": "CANCELADO"
+}

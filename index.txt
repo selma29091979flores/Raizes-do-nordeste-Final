@@ -1,0 +1,21 @@
+left_to_right_direction
+actor "Usuário (Cliente / Atendente)" as Usuario
+actor "Administrador (Matriz)" as Admin
+actor "Gateway de Pagamento" as Gateway
+
+rectangle "Sistema Raízes do Nordeste" {
+  usecase "Cadastrar Cliente (UC1)" as UC1
+  usecase "Validar Cliente (UC2)" as UC2
+  usecase "Realizar Pedido Multicanal (UC3)" as UC3
+  usecase "Logar e Emitir JWT (UC4)" as UC4
+  usecase "Gerenciar Estoque Local (UC5)" as UC5
+}
+
+Usuario --> UC1
+Usuario --> UC3
+Usuario --> UC4
+Admin --> UC5
+
+UC1 ..> UC2 : <<INCLUDE>>
+UC4 ..> UC1 : <<EXTEND>>
+UC3 <-- Gateway

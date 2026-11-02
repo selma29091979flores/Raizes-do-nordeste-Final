@@ -1,0 +1,9 @@
+{
+  "error": "ESTOQUE_INSUFICIENTE",
+  "message": "Não há quantidade suficiente para um ou mais itens.",
+  "details": [
+    { "field": "itens.quantidade", "issue": "Disponível: 1" }
+  ],
+  "timestamp": "2026-10-24T14:45:03Z",
+  "path": "/api/v1/pedidos"
+}

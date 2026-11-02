@@ -1,0 +1,6 @@
+{
+  "transacaoId": "tx_mock_992811",
+  "pedidoId": 9001,
+  "statusGateway": "APPROVED",
+  "novoStatusPedido": "RECEBIDO"
+}

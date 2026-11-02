@@ -1,0 +1,8 @@
+{
+  "canalPedido": "TOTEM",
+  "unidadeId": 1,
+  "itens": [
+    { "produtoId": 101, "quantidade": 2 }
+  ],
+  "formaPagamento": "MOCK"
+}

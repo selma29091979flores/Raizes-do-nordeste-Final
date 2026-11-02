@@ -1,0 +1,9 @@
+{
+  "pedidoId": 9001,
+  "status": "AGUARDANDO_PAGAMENTO",
+  "total": 79.80,
+  "itens": [
+    { "produtoId": 101, "quantidade": 2, "precoUnitario": 39.90 }
+  ],
+  "createdAt": "2026-10-24T14:45:02Z"
+}
